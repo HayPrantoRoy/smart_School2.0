@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.maateen.me/solaiman-lipi/font.css');
+        @import url("https://lipilikhi.github.io/fonts/AnekBangla.min.css");
+        @import url('https://fonts.maateen.me/baloo-da-2/font.css');
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 1.15em;
+            font-family: "myriadpro-regular", Helvetica, sans-serif, Tahoma, SolaimanLipi, Kalpurush, Shonar Bangla, Arial, Arial, sans-serif;
+            color: #222;
+            background: white;
+            padding: 10px;
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            z-index: 1;
+            height: 150px;
+            /* make sure header has height */
+            background: transparent;
+            /* no image */
+        }
+
+        /* Background Animation inside header */
+        header .bg-animation {
+            position: absolute;
+            /* ✅ use absolute, not fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* behind logo/text */
+            overflow: hidden;
+        }
+
+        header .floating-orb,
+        header .geometric-shape,
+        header .wave-pattern {
+            position: absolute;
+        }
+
+        /* Keep your same animation styles */
+        .floating-orb {
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(79, 172, 254, 0.15), rgba(0, 242, 254, 0.1));
+            animation: float 25s infinite ease-in-out;
+
+        }
+
+        .floating-orb:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -10%;
+            left: -5%;
+            animation-delay: 0s;
+        }
+
+        .floating-orb:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 20%;
+            right: -5%;
+            animation-delay: -8s;
+        }
+
+        .floating-orb:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            left: 10%;
+            animation-delay: -16s;
+        }
+
+        .floating-orb:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 20%;
+            animation-delay: -24s;
+        }
+
+        .geometric-shape {
+            background: linear-gradient(45deg, rgba(79, 172, 254, 0.08), rgba(0, 242, 254, 0.06));
+            animation: rotate 30s infinite linear;
+        }
+
+        .geometric-shape:nth-child(5) {
+            width: 100px;
+            height: 100px;
+            top: 15%;
+            left: 30%;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-delay: -5s;
+        }
+
+        .geometric-shape:nth-child(6) {
+            width: 80px;
+            height: 80px;
+            bottom: 25%;
+            right: 40%;
+            clip-path: polygon(30% 0%, 0% 50%, 30% 100%, 70% 100%, 100% 50%, 70% 0%);
+            animation-delay: -10s;
+        }
+
+        .wave-pattern {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(79, 172, 254, 0.05), rgba(0, 242, 254, 0.03));
+            clip-path: polygon(0 100%, 0 50%, 25% 60%, 50% 40%, 75% 65%, 100% 45%, 100% 100%);
+            animation: wave 15s infinite ease-in-out;
+        }
+
+        /* Animations */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) scale(1);
+            }
+
+            25% {
+                transform: translateY(-30px) translateX(20px) scale(1.05);
+            }
+
+            50% {
+                transform: translateY(20px) translateX(-15px) scale(0.95);
+            }
+
+            75% {
+                transform: translateY(-15px) translateX(25px) scale(1.02);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                clip-path: polygon(0 100%, 0 50%, 25% 60%, 50% 40%, 75% 65%, 100% 45%, 100% 100%);
+            }
+
+            50% {
+                clip-path: polygon(0 100%, 0 60%, 25% 45%, 50% 65%, 75% 40%, 100% 60%, 100% 100%);
+            }
+        }
+
+        .logo-area {
+            position: relative;
+            /* stays above background */
+            display: flex;
+            /* logo + text side by side */
+            align-items: center;
+            /* vertically centered */
+            justify-content: center;
+            /* center whole block */
+            gap: 15px;
+            /* spacing between logo and text */
+            z-index: 2;
+            /* make sure it’s above animation */
+            color: #222;
+            /* text color */
+            text-align: left;
+            /* text aligned left */
+        }
+
+        .logo-area img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .school-name h3 {
+            font-size: 28px;
+            margin: 0;
+            color: #1a1a1a;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+
+        .school-name h2 {
+            font-size: 20px;
+            color: #444;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        nav {
+            background: #ffffff;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            position: relative;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #000, transparent, #000);
+            animation: borderFlow 4s ease-in-out infinite;
+            opacity: 0.1;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: left;
+            flex-wrap: wrap;
+            position: relative;
+
+        }
+
+        .nav-container a {
+            padding: 10px 5px;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 500;
+            position: relative;
+            font-family: 'Hind Siliguri', sans-serif;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            font-size: 18px;
+            letter-spacing: 0.3px;
+            border-radius: 12px;
+            margin: 7px 8px;
+            overflow: hidden;
+        }
+
+        /* Morphing background effect */
+        .nav-container a::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%);
+            border-radius: 50%;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        /* Sliding underline */
+        .nav-container a::before {
+            content: "";
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #000000;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            transform: translateX(-50%);
+        }
+
+        .nav-container a:hover {
+            color: #000000;
+            transform: translateY(-2px) scale(1.02);
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container a:hover::after {
+            width: 120%;
+            height: 120%;
+            opacity: 0.8;
+        }
+
+        .nav-container a:hover::before {
+            width: 70%;
+        }
+
+        /* Floating effect on active */
+        .nav-container a:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+
+
+        /* Mobile Menu */
+        .mobile-toggle {
+            display: none;
+            background: #ffffff;
+            border: 2px solid #000000;
+            color: #000000;
+            font-size: 18px;
+            padding: 12px 14px;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 12px;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            overflow: hidden;
+        }
+
+        .mobile-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .mobile-toggle:hover::before {
+            left: 0;
+        }
+
+        .mobile-toggle:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-container {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                border-radius: 0 0 20px 20px;
+                overflow: hidden;
+            }
+
+            .nav-container.active {
+                display: flex;
+                animation: expandDown 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            }
+
+            .nav-container a {
+                margin: 0;
+                border-radius: 0;
+                padding: 20px 25px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                opacity: 0;
+                transform: translateX(-30px);
+                animation: slideInStagger 0.6s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+            }
+
+            .nav-container a:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+
+            .nav-container a:nth-child(2) {
+                animation-delay: 0.15s;
+            }
+
+            .nav-container a:nth-child(3) {
+                animation-delay: 0.2s;
+            }
+
+            .nav-container a:nth-child(4) {
+                animation-delay: 0.25s;
+            }
+
+            .nav-container a:nth-child(5) {
+                animation-delay: 0.3s;
+            }
+
+            .nav-container a:nth-child(6) {
+                animation-delay: 0.35s;
+            }
+
+            .nav-container a:nth-child(7) {
+                animation-delay: 0.4s;
+            }
+
+            .nav-container a:nth-child(8) {
+                animation-delay: 0.45s;
+            }
+
+            .nav-container a:nth-last-child(-n+2) {
+                margin: 12px 20px;
+                border-radius: 15px;
+                background: #000000;
+                color: #ffffff;
+            }
+        }
+
+
+
+        /* Floating particles effect */
+
+
+        /* Demo content */
+        .demo-content {
+            padding: 80px 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .demo-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #000000;
+            font-weight: 700;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .demo-content p {
+            font-size: 1.1rem;
+            color: #666;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* News Bar */
+        .news-bar {
+            background: #fff;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-title {
+            background: #111;
+            color: white;
+            padding: 6px 15px;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        .news-text {
+            flex: 1;
+            padding: 6px 15px;
+            font-size: 18px;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #111;
+        }
+
+        /* Main Layout */
+        main {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            align-items: flex-start;
+            /* ensures top alignment of slider and content */
+        }
+
+        /* Left Column */
+        .left-col {
+            flex: 2;
+            background: #fff;
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Image Slider */
+        .image-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider-container img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 16px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Navigation Buttons */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .slider-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Slider Dots */
+        .slider-dots {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active,
+        .dot:hover {
+            background-color: #717171;
+        }
+
+        /* Content Title */
+        .left-col h2 {
+            margin-top: 15px;
+            color: #a67c00;
+            font-size: 22px;
+        }
+
+        .title-underline {
+            border-top: 4px solid skyblue;
+            width: 60px;
+            margin: 5px 0 15px 0;
+        }
+
+        /* Paragraph */
+        .left-col p {
+            line-height: 1.7;
+            color: #555;
+            font-size: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .slider-container img {
+                height: 280px;
+            }
+
+            .image-caption {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+
+            .slider-nav {
+                padding: 8px 12px;
+                font-size: 16px;
+            }
+        }
+
+        .sidebar-container {
+            max-width: 400px;
+        }
+
+        .info-card {
+            margin-bottom: 12px;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-title {
+            padding: 15px 18px;
+            background: url("white-paper-texture-background.jpg") no-repeat center center / cover;
+            border-bottom: 1px solid #f0f0f0;
+            font-weight: 600;
+            color: #333;
+            border-radius: 8px 8px 0 0;
+        }
+
+
+        .card-details {
+            display: block;
+            padding: 15px 18px;
+            background: #fafafa;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Notice Styles */
+        .notice-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .notice-item:last-child {
+            border-bottom: none;
+        }
+
+        .notice-date {
+            font-weight: 600;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .notice-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Routine Styles */
+        .routine-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .routine-day {
+            font-weight: 600;
+            color: #444;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .routine-time {
+            color: #666;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .routine-subject {
+            color: #555;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* Syllabus Styles */
+        .syllabus-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .syllabus-grade {
+            padding: 12px 15px;
+            background: white;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            color: #555;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .syllabus-grade:hover {
+            background: #f5f5f5;
+        }
+
+        /* Exam Styles */
+        .exam-schedule {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .exam-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e8e8e8;
+        }
+
+        .exam-date {
+            font-weight: 600;
+            color: #444;
+            font-size: 13px;
+        }
+
+        .exam-subject {
+            color: #555;
+            font-size: 13px;
+        }
+
+        .exam-time {
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* Result Styles */
+        .result-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .result-item {
+            text-align: center;
+            padding: 15px 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e8e8e8;
+        }
+
+        .result-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .result-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        /* Calendar */
+        .calendar {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            background: white;
+            color: black;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calendar-nav {
+            background: none;
+            border: none;
+            color: black;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .calendar table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .calendar th,
+        .calendar td {
+            padding: 8px 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .calendar th {
+            background: #eee;
+            font-weight: 600;
+        }
+
+        .calendar td.highlight {
+            background: #ffeb3b;
+            font-weight: bold;
+        }
+
+        .calendar td.today {
+            background: #4caf50;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Attendance Section */
+        .attendance-section {
+            background: white;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .attendance-header {
+            background: #0d6efd;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .attendance-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .attendance-item:last-child {
+            border-bottom: none;
+        }
+
+        .attendance-label {
+            font-weight: 500;
+        }
+
+        .attendance-value {
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 3px;
+            color: white;
+        }
+
+        .total {
+            background: #ff9800;
+        }
+
+        .present {
+            background: #4caf50;
+        }
+
+        .absent {
+            background: #f44336;
+        }
+
+        /* Location Section */
+        .location-section {
+            background: white;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .location-header {
+            background: white;
+            color: black;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .location-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 150px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* Visitors Counter */
+        .visitors-section {
+            background: white;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .visitors-header {
+            background: #9c27b0;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .visitors-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .counter-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: #9c27b0;
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #ccc;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-left {
+
+            align-items: center;
+        }
+
+        .footer-left img {
+            width: 90px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .footer-left p {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .footer-middle {
+            flex: 1;
+            margin: 0 40px;
+        }
+
+        .footer-middle h3 {
+            color: yellow;
+            margin-bottom: 5px;
+        }
+
+        .footer-middle p {
+            margin: 3px 0;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .footer-middle p strong {
+            color: #bbb;
+        }
+
+        .footer-right {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-menu li {
+            border-left: 3px solid #444;
+            padding-left: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .footer-right img {
+            width: 120px;
+        }
+
+        /* Responsive */
+        @media(max-width:768px) {
+            .school-name h1 {
+                font-size: 20px;
+            }
+
+            .school-name h2 {
+                font-size: 14px;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease;
+            }
+
+            .nav-container.show {
+                max-height: 500px;
+            }
+
+            .nav-container a {
+                border-top: 1px solid #e0e0e0;
+                text-align: center;
+            }
+
+            main {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .right-col {
+            flex: 1;
+        }
+
+        .slide-indicator {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .slide-lines {
+            display: flex;
+            gap: 8px;
+        }
+
+        .slide-line {
+            width: 30px;
+            height: 2px;
+            background: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .slide-line.active {
+            background: #333;
+            width: 40px;
+        }
+
+        .slide-counter {
+            color: #999;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <header>
+        <div class="bg-animation">
+            <div class="floating-orb"></div>
+            <div class="floating-orb"></div>
+            <div class="floating-orb"></div>
+            <div class="floating-orb"></div>
+            <div class="geometric-shape"></div>
+            <div class="geometric-shape"></div>
+            <div class="wave-pattern"></div>
+        </div>
+
+        <div class="logo-area">
+            <img src="logo.png" alt="School Logo">
+            <div class="school-name">
+                <h3>স্কুল ম্যানেজমেন্ট সিস্টেম</h3>
+                <h2>School Management System</h2>
+            </div>
+        </div>
+    </header>
+
+
+
+
+    <nav>
+        <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+        <div class="nav-container" id="navMenu">
+            <a href="#">হোম পেজ</a>
+            <a href="#">স্কুল প্রশাসন</a>
+            <a href="#">প্রাতিষ্ঠানিক কার্যক্রম</a>
+            <a href="#">গ্যালারি</a>
+            <a href="#">অন্যান্য তথ্য</a>
+            <a href="#">যোগাযোগ</a>
+            <a href="#">ভর্তি তথ্য</a>
+            <a href="#">রেজাল্ট অনুসন্ধান</a>
+            <a href="#">শিক্ষক তালিকা</a>
+            <a href="#">সংবাদ ও বিজ্ঞপ্তি</a>
+        </div>
+
+    </nav>
+
+
+    <!-- News Bar -->
+    <div class="news-bar">
+        <div class="news-title">নোটিশ বোর্ড</div>
+        <div class="news-text" id="typewriter"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Left Column -->
+        <div class="left-col">
+            <!-- Image Slider -->
+            <div class="image-slider">
+                <div class="slider-container" id="sliderContainer">
+                    <img src="school3.jpg" alt="বিদ্যালয় গেট">
+                    <img src="school3.jpg" alt="প্রধান ভবন">
+                    <img src="school3.jpg" alt="শ্রেণীকক্ষ">
+                    <img src="school3.jpg" alt="খেলার মাঠ">
+                </div>
+                <div class="image-caption" id="imageCaption">বিদ্যালয় গেট</div>
+                <button class="slider-nav prev" onclick="changeSlide(-1)">❮</button>
+                <button class="slider-nav next" onclick="changeSlide(1)">❯</button>
+            </div>
+
+
+            <div class="slide-indicator">
+                <div class="slide-lines">
+                    <div class="slide-line active"></div>
+                    <div class="slide-line"></div>
+                    <div class="slide-line"></div>
+                    <div class="slide-line"></div>
+                </div>
+                <div class="slide-counter">
+                    <span id="currentSlide">01</span> / <span id="totalSlides">04</span>
+                </div>
+            </div>
+
+
+            <p style="font-size: 30px;">স্কুল ইতিহাস</p>
+            <div class="title-underline"></div>
+            <p style="font-size: 17px;">
+                <strong><mark style="background:#fde047; color:#7f1d1d;">স্কুলের ইতিহাস</mark></strong> মানব সভ্যতার <u
+                    style="text-decoration-color:#2563eb;">অগ্রযাত্রার</u> এক দীর্ঘ ও <span
+                    style="color:#065f46;font-weight:bold;">গুরুত্বপূর্ণ অধ্যায়</span>।
+                প্রাচীনকালে বাংলার শিক্ষাব্যবস্থা মূলত <i>গুরুগৃহ</i>, <b>পাঠশালা</b>, টোল ও <em>মাদ্রাসা</em> ভিত্তিক
+                ছিল,
+                যেখানে শিক্ষার্থীরা গুরুজনের তত্ত্বাবধানে বসে <mark style="background:#bef264;">ধর্মীয় শিক্ষা</mark>,
+                <span style="color:green;font-weight:bold">নৈতিকতা</span>, সাহিত্য, গণিত,
+                জ্যোতির্বিজ্ঞান ও প্রাকৃতিক বিদ্যা শিখত। সেই সময়ে শিক্ষার মাধ্যম ছিল <u>মুখস্থ পদ্ধতি</u><sup>¹</sup>,
+                হাতে লিখে অনুশীলন এবং
+                <b>শৃঙ্খলা</b> ও <strong>চরিত্র গঠন</strong>ের ওপর বিশেষ গুরুত্ব দেওয়া হতো।<br><br>
+
+                মধ্যযুগে মুসলিম শাসনামলে <mark style="background:#fca5a5;">মাদ্রাসা শিক্ষা</mark> প্রসার লাভ করে, যেখানে
+                <i>কোরআন</i>, <i>হাদিস</i>, আরবি সাহিত্য,
+                গণিত, যুক্তিবিদ্যা ও দর্শন পড়ানো হতো। এ সময়ের শিক্ষাব্যবস্থা মূলত ধর্মীয় জ্ঞান ও নৈতিক উন্নতির ওপর
+                কেন্দ্রীভূত ছিল, তবে
+                <span style="color:blue;font-style:italic;">প্রাকৃতিক ও প্রয়োগমুখী বিদ্যা</span>র কিছু অংশও এতে
+                অন্তর্ভুক্ত ছিল।
+                এই যুগে শিক্ষা ছিল সমাজে মর্যাদা ও নৈতিক দিক থেকে উন্নতির প্রধান মাধ্যম।<br><br>
+
+                বাংলায় আধুনিক স্কুল ব্যবস্থার সূচনা ঘটে <strong>ব্রিটিশ শাসনামলে</strong>। বিশেষ করে <u>১৮৩৫</u> সালে
+                লর্ড ম্যাকলে
+                <mark style="background:#c084fc;">ইংরেজি শিক্ষানীতি</mark> চালু করলে দেশব্যাপী আধুনিক ধাঁচের স্কুল ও
+                কলেজ প্রতিষ্ঠিত হয়।
+                তখন ইংরেজি ভাষার পাশাপাশি <b>বিজ্ঞান</b>, <b>ভূগোল</b>, <b>ইতিহাস</b>, <b>গণিত</b> এবং অর্থনীতির মতো
+                আধুনিক বিষয়গুলো পাঠ্যসূচিতে অন্তর্ভুক্ত হয়।
+                উনিশ শতকের শেষভাগে বাংলার অনেক <i>শিক্ষানুরাগী</i> ব্যক্তি ও সংগঠন স্কুল প্রতিষ্ঠায় গুরুত্বপূর্ণ ভূমিকা
+                রাখেন,
+                যার মধ্যে <u>ঈশ্বরচন্দ্র বিদ্যাসাগর</u> নারীশিক্ষা ও প্রাথমিক শিক্ষা বিস্তারে <mark
+                    style="background:#fef3c7;">অসামান্য অবদান</mark> রাখেন।<br><br>
+
+                দেশভাগের পর ১৯৪৭ সালে পূর্ববাংলার শিক্ষাব্যবস্থায় বড় পরিবর্তন আসে।
+                স্বাধীনতার পর <span style="color:purple;font-weight:bold">বাংলাদেশ সরকার</span> শিক্ষাকে মৌলিক অধিকার
+                ঘোষণা করে এবং
+                প্রত্যন্ত অঞ্চলেও প্রাথমিক ও মাধ্যমিক বিদ্যালয় প্রতিষ্ঠার উদ্যোগ নেয়।
+                <em>জাতীয় শিক্ষা নীতি</em> প্রণয়ন, <u>বিনামূল্যে পাঠ্যবই</u> বিতরণ এবং মেয়েদের শিক্ষায় বিশেষ সুযোগ
+                প্রদান—এসব পদক্ষেপ শিক্ষাবিস্তারকে ত্বরান্বিত করে।
+                এই সময় অনেক শিক্ষক ও শিক্ষা সংগঠন দেশের শিক্ষাক্ষেত্রে উন্নয়নে অবদান রাখেন।<br><br>
+
+                বর্তমান যুগে <mark style="background:#bbf7d0;">আধুনিক বিদ্যালয়</mark> কেবল পাঠদানের স্থান নয়, বরং
+                শিক্ষার্থীদের
+                <strong>সামাজিক</strong>, <strong>সাংস্কৃতিক</strong>, <strong>ক্রীড়া</strong> ও
+                <strong>প্রযুক্তিগত</strong> দক্ষতা বিকাশের ক্ষেত্র হিসেবে গুরুত্বপূর্ণ ভূমিকা পালন করছে।
+                আধুনিক স্কুলে <span style="color:red">কম্পিউটার ল্যাব</span>, <u>বিজ্ঞানাগার</u>, <i>গ্রন্থাগার</i>,
+                <mark style="background:#fcd34d;">মাল্টিমিডিয়া ক্লাসরুম</mark>, <small>(অনলাইন শিক্ষা ব্যবস্থা)</small>
+                ইত্যাদি সুযোগ-সুবিধা যুক্ত হয়েছে।
+                এর ফলে শিক্ষার্থীরা কেবল পাঠ্যপুস্তকভিত্তিক জ্ঞানেই সীমাবদ্ধ না থেকে বিশ্বব্যাপী তথ্য ও প্রযুক্তির সাথে
+                তাল মিলিয়ে চলার সুযোগ পাচ্ছে।<br><br>
+
+                ভবিষ্যতের স্কুল হবে আরও <span style="color:#0284c7;font-weight:bold;">ডিজিটাল</span> ও <span
+                    style="color:#16a34a;font-weight:bold;">প্রযুক্তিনির্ভর</span>,
+                যেখানে <u>ভার্চুয়াল রিয়ালিটি</u>, <u>কৃত্রিম বুদ্ধিমত্তা</u> এবং <u>গ্লোবাল ক্লাসরুম</u> ব্যবহার করে
+                শিক্ষার্থীদের জন্য এক নতুন যুগের দ্বার উন্মোচিত হবে।
+                এই দীর্ঘ বিবর্তনের পথে আজকের স্কুল একটি
+                <mark style="background:#fde68a;">শিক্ষা, মানবিকতা ও নেতৃত্বগুণ বিকাশের</mark> প্রধান প্রতিষ্ঠান হয়ে
+                দাঁড়িয়েছে,
+                যা আগামী প্রজন্মকে <u>জ্ঞান</u>, <u>নীতি</u> ও <u>মূল্যবোধ</u>ে সমৃদ্ধ করে দেশের উন্নয়ন ও অগ্রগতিতে
+                <b>অপরিসীম অবদান</b> রাখছে।<br><br>
+
+                <small style="color:#64748b;">¹ মুখস্থ পদ্ধতি: পাঠ্য বিষয় বারবার পড়ে মনে রাখা, যা প্রাচীন
+                    শিক্ষাব্যবস্থার মূল ভরসা ছিল।</small>
+            </p>
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-col">
+
+            <div class="sidebar-container">
+                <div class="info-card notice-card">
+                    <div class="card-title">
+                        <img src="warning.png" alt="Mood Board Icon" width="40px"
+                            style="vertical-align: middle; margin-right: 10px; ">
+                        নোটিশ বোর্ড
+                    </div>
+                    <div class="card-details">
+                        <div class="notice-item">
+                            <div class="notice-date"> <img src="schedule.png" alt="Mood Board Icon" width="20px"
+                                    style="vertical-align: middle; ">
+                                ১৯ ডিসেম্বর ২০২৫</div>
+                            <div class="notice-text">
+                                ২০২৫ শিক্ষাবর্ষে ৬ষ্ঠ শ্রেণির ভর্তি নোটিশ</div>
+                        </div>
+                        <div class="notice-item">
+                            <div class="notice-date">
+                                <img src="schedule.png" alt="Mood Board Icon" width="20px"
+                                    style="vertical-align: middle; ">
+                                ১৫ ডিসেম্বর ২০২৫
+                            </div>
+                            <div class="notice-text">বার্ষিক পরীক্ষার সময়সূচি প্রকাশ</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="info-card routine-card">
+                    <div class="card-title">
+                        <img src="morning-routine.png" alt="Mood Board Icon" width="40px"
+                            style="vertical-align: middle;">
+                        ক্লাস রুটিন
+                    </div>
+                    <div class="card-details">
+                        <div class="routine-grid">
+                            <div class="routine-day">সোমবার</div>
+                            <div class="routine-time">৮:০০ - ১০:০০</div>
+                            <div class="routine-subject">বাংলা</div>
+
+                            <div class="routine-day">মঙ্গলবার</div>
+                            <div class="routine-time">৮:০০ - ১০:০০</div>
+                            <div class="routine-subject">গণিত</div>
+
+                            <div class="routine-day">বুধবার</div>
+                            <div class="routine-time">৮:০০ - ১০:০০</div>
+                            <div class="routine-subject">ইংরেজি</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="info-card exam-card">
+                    <div class="card-title">
+                        <img src="exam.png" alt="Mood Board Icon" width="35px" style="vertical-align: middle;">
+                        পরীক্ষার রুটিন
+                    </div>
+                    <div class="card-details">
+                        <div class="exam-schedule">
+                            <div class="exam-row">
+                                <span class="exam-date">২৫ ডিসেম্বর</span>
+                                <span class="exam-subject">বাংলা</span>
+                                <span class="exam-time">সকাল ৯টা</span>
+                            </div>
+                            <div class="exam-row">
+                                <span class="exam-date">২৭ ডিসেম্বর</span>
+                                <span class="exam-subject">গণিত</span>
+                                <span class="exam-time">সকাল ৯টা</span>
+                            </div>
+                            <div class="exam-row">
+                                <span class="exam-date">২৯ ডিসেম্বর</span>
+                                <span class="exam-subject">ইংরেজি</span>
+                                <span class="exam-time">সকাল ৯টা</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card result-card">
+                    <div class="card-title">
+                        <img src="investigation.png" alt="Mood Board Icon" width="35px" style="vertical-align: middle;">
+                        পরীক্ষার ফলাফল
+                    </div>
+                    <div class="card-details">
+                        <div class="result-stats">
+                            <div class="result-item">
+                                <div class="result-label">পাস</div>
+                                <div class="result-number">৯৮%</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-label">জিপিএ-৫</div>
+                                <div class="result-number">৮৫</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-label">মোট ছাত্র</div>
+                                <div class="result-number">৩৫০</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Calendar -->
+            <div class="calendar">
+                <div class="calendar-header">
+                    <button class="calendar-nav" onclick="changeMonth(-1)">❮</button>
+                    <span id="monthYear"></span>
+                    <button class="calendar-nav" onclick="changeMonth(1)">❯</button>
+                </div>
+                <table>
+                    <tr>
+                        <th>রবি</th>
+                        <th>সোম</th>
+                        <th>মঙ্গল</th>
+                        <th>বুধ</th>
+                        <th>বৃহ</th>
+                        <th>শুক্র</th>
+                        <th>শনি</th>
+                    </tr>
+                    <tbody id="calendarBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Attendance Section -->
+
+
+            <!-- Location Section -->
+            <div class="location-section">
+
+                <div class="location-content">
+                    <div class="map-placeholder">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2921150.088064519!2d88.08442389890225!3d23.685009763037288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751ab5c1bcbba3f%3A0x4a7885f704ec5f26!2sBangladesh!5e0!3m2!1sen!2sbd!4v1692101234567"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <p>School Location</p>
+                </div>
+            </div>
+
+
+            <!-- Visitors Counter -->
+
+        </div>
+    </main>
+
+    <footer>
+        <!-- Left Side -->
+        <div class="footer-left">
+            <img src="http://static.vecteezy.com/system/resources/previews/039/607/001/non_2x/school-logo-design-template-free-vector.jpg"
+                alt="School Logo"><br>
+            <p>© 2025 - All Rights Reserved</p>
+        </div>
+
+        <!-- Middle Side -->
+        <div class="footer-middle">
+            <h3>Our Address</h3>
+            <p>School Name</p>
+            <p>School Address</p>
+            <p><strong>Tel:</strong> 017XXXXXXXXXX</p>
+            <p><strong>Email:</strong> Name@gmail.com</p>
+        </div>
+
+        <!-- Right Side -->
+        <div class="footer-right">
+            <ul class="footer-menu">
+                <li>হোম পেজ</li>
+                <li>প্রাতিষ্ঠানিক কার্যক্রম</li>
+                <li>ভর্তি তথ্য</li>
+            </ul>
+            <ul class="footer-menu">
+                <li>স্কুল প্রশাসন</li>
+                <li>আমাদের কথা</li>
+                <li>যোগাযোগ</li>
+            </ul>
+            <ul class="footer-menu">
+                <li>Developed By</li>
+                <img src="techshilpo.png">
+            </ul>
+        </div>
+    </footer>
+</body>
+<script>
+    // Global Variables
+    let slideIndex = 0;
+    let currentMonthIndex = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+    const captions = ["বিদ্যালয় গেট", "প্রধান ভবন", "শ্রেণীকক্ষ", "খেলার মাঠ"];
+    const months = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন",
+        "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+
+    // Mobile Menu Toggle
+    function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('show');
+    }
+
+    // Accordion toggle for sidebar boxes
+    function toggleBox(header) {
+        const box = header.parentElement;
+        box.classList.toggle('open');
+        const content = box.querySelector('.box-content');
+        if (box.classList.contains('open')) {
+            content.style.display = 'block';
+        } else {
+            content.style.display = 'none';
+        }
+    }
+
+    // Image Slider Functions
+    function changeSlide(direction) {
+        slideIndex += direction;
+        if (slideIndex >= captions.length) slideIndex = 0;
+        if (slideIndex < 0) slideIndex = captions.length - 1;
+        updateSlider();
+    }
+
+    function currentSlide(index) {
+        slideIndex = index - 1;
+        updateSlider();
+    }
+
+    function updateSlider() {
+        const container = document.getElementById('sliderContainer');
+        const caption = document.getElementById('imageCaption');
+        const dots = document.querySelectorAll('.dot');
+
+        container.style.transform = `translateX(-${slideIndex * 100}%)`;
+        caption.textContent = captions[slideIndex];
+
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === slideIndex);
+        });
+    }
+
+    // Auto slide every 5 seconds
+    setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+
+    // Calendar Functions
+    function generateCalendar(month, year) {
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+
+        let html = '';
+        let date = 1;
+
+        for (let i = 0; i < 6; i++) {
+            html += '<tr>';
+            for (let j = 0; j < 7; j++) {
+                if (i === 0 && j < firstDay) {
+                    html += '<td></td>';
+                } else if (date > daysInMonth) {
+                    break;
+                } else {
+                    const isToday = (date === today.getDate() && month === today.getMonth() && year === today.getFullYear());
+                    const classes = isToday ? 'today' : (date === 15 ? 'highlight' : '');
+                    html += `<td class="${classes}">${date}</td>`;
+                    date++;
+                }
+            }
+            html += '</tr>';
+            if (date > daysInMonth) break;
+        }
+
+        document.getElementById('calendarBody').innerHTML = html;
+        document.getElementById('monthYear').textContent = `${months[month]} ${year}`;
+    }
+
+    function changeMonth(direction) {
+        currentMonthIndex += direction;
+        if (currentMonthIndex > 11) {
+            currentMonthIndex = 0;
+            currentYear++;
+        } else if (currentMonthIndex < 0) {
+            currentMonthIndex = 11;
+            currentYear--;
+        }
+        generateCalendar(currentMonthIndex, currentYear);
+    }
+
+    // Attendance Functions
+    function updateAttendance() {
+        const total = 537;
+        const present = Math.floor(Math.random() * 50) + 480; // Random between 480-530
+        const absent = total - present;
+
+        document.getElementById('todayPresent').textContent = present.toString();
+        document.getElementById('todayAbsent').textContent = absent.toString();
+    }
+
+    // Visitor Counter Function
+    function updateVisitorCount() {
+        const currentElement = document.getElementById('visitorCount');
+        const current = parseInt(currentElement.textContent);
+        currentElement.textContent = (current + 1).toString().padStart(7, '0');
+    }
+
+    // Typewriter News Effect
+    const newsItems = [
+        "২০২৫ সালের অর্ধ-বার্ষিক পরীক্ষার ফলাফল ওয়েবসাইটে প্রকাশ।",
+        "নতুন শিক্ষাবর্ষের ভর্তি প্রক্রিয়া শুরু হয়েছে।",
+        "বিদ্যালয়ের বার্ষিক ক্রীড়া প্রতিযোগিতা আগামী মাসে অনুষ্ঠিত হবে।",
+        "শিক্ষক-অভিভাবক সভা আগামী সপ্তাহে অনুষ্ঠিত হবে।",
+        "বার্ষিক সাংস্কৃতিক অনুষ্ঠানের জন্য নিবন্ধন শুরু হয়েছে।"
+    ];
+
+    let itemIndex = 0;
+    let charIndex = 0;
+    let typingSpeed = 80;
+    let deletingSpeed = 50;
+    let pauseBetween = 2000;
+    const typewriter = document.getElementById("typewriter");
+
+    function typeEffect() {
+        if (charIndex < newsItems[itemIndex].length) {
+            typewriter.textContent += newsItems[itemIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(typeEffect, typingSpeed);
+        } else {
+            setTimeout(deleteEffect, pauseBetween);
+        }
+    }
+
+    function deleteEffect() {
+        if (charIndex > 0) {
+            typewriter.textContent = newsItems[itemIndex].substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(deleteEffect, deletingSpeed);
+        } else {
+            itemIndex = (itemIndex + 1) % newsItems.length;
+            setTimeout(typeEffect, 500);
+        }
+    }
+
+    // Initialize Functions when page loads
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize calendar
+        generateCalendar(currentMonthIndex, currentYear);
+
+        // Start typewriter effect
+        typeEffect();
+
+        // Initial attendance update
+        updateAttendance();
+
+        // Set up intervals
+        setInterval(updateAttendance, 300000); // Update attendance every 5 minutes
+        setInterval(updateVisitorCount, 30000); // Update visitor count every 30 seconds
+
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('.nav-container a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Add your navigation logic here
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function (e) {
+            const nav = document.getElementById('navMenu');
+            const toggle = document.querySelector('.mobile-toggle');
+
+            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+                nav.classList.remove('show');
+            }
+        });
+    });
+
+    // Additional Utility Functions
+
+    // Format numbers in Bengali
+    function toBengaliNumber(number) {
+        const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        return number.toString().replace(/\d/g, digit => bengaliDigits[digit]);
+    }
+
+    // Random quote for news (optional)
+    function getRandomNews() {
+        return newsItems[Math.floor(Math.random() * newsItems.length)];
+    }
+
+    // Smooth fade animation for elements
+    function fadeIn(element, duration = 300) {
+        element.style.opacity = 0;
+        element.style.display = 'block';
+
+        let start = performance.now();
+
+        function animate(currentTime) {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+
+            element.style.opacity = progress;
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    // Add loading animation for images
+    function handleImageLoad() {
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            img.addEventListener('load', function () {
+                this.style.opacity = '1';
+            });
+
+            // Add loading placeholder
+            if (!img.complete) {
+                img.style.opacity = '0.5';
+            }
+        });
+    }
+
+    // Call image loading function
+    handleImageLoad();
+
+    // Export functions if needed (for modular usage)
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = {
+            toggleMenu,
+            toggleBox,
+            changeSlide,
+            currentSlide,
+            changeMonth,
+            updateAttendance,
+            updateVisitorCount,
+            toBengaliNumber,
+            fadeIn
+        };
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slider-container img');
+        const captions = ['বিদ্যালয় গেট', 'প্রধান ভবন', 'শ্রেণীকক্ষ', 'খেলার মাঠ'];
+        const totalSlides = slides.length;
+
+        const container = document.getElementById('sliderContainer');
+        const caption = document.getElementById('imageCaption');
+        const currentSlideSpan = document.getElementById('currentSlide');
+        const slideLines = document.querySelectorAll('.slide-line');
+
+        // Add CSS transition for smooth movement
+        container.style.transition = 'transform 0.5s ease-in-out';
+
+        function updateSlider() {
+            container.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+
+            // Caption animation
+            caption.style.animation = 'none';
+            setTimeout(() => {
+                caption.textContent = captions[currentSlideIndex];
+                caption.style.animation = 'slideIn 0.5s ease';
+            }, 50);
+
+            // Slide indicators
+            slideLines.forEach((line, index) => line.classList.toggle('active', index === currentSlideIndex));
+
+            // Slide counter
+            currentSlideSpan.textContent = String(currentSlideIndex + 1).padStart(2, '0');
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            if (currentSlideIndex >= totalSlides) currentSlideIndex = 0;
+            else if (currentSlideIndex < 0) currentSlideIndex = totalSlides - 1;
+            updateSlider();
+        }
+
+        // Auto slide every 3 seconds
+        setInterval(() => changeSlide(1), 3000);
+
+        // Touch swipe support
+        let startX = 0;
+        container.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+        container.addEventListener('touchend', e => {
+            const endX = e.changedTouches[0].clientX;
+            if (Math.abs(startX - endX) > 50) changeSlide(startX - endX > 0 ? 1 : -1);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            else if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Initialize slider
+        updateSlider();
+    });
+</script>
+
+
+
+
+</html>
